@@ -8,7 +8,7 @@ export default function Dashboard() {
     <div>
       <HorizontalNavbar/>
       <div>
-        <h1>Welcome to Univ.tn</h1>
+        {/* <h1>Welcome to Univ.tn</h1> */}
         {/* Other content */}
       </div>
     </div>
