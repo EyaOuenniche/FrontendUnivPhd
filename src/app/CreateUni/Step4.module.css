@@ -1,0 +1,78 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .sectionTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  .programCard {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .programTitle {
+    font-size: 1.5rem;
+    color: #444;
+    font-weight: 500;
+  }
+  
+  .subSpecialtyCard {
+    margin-left: 20px;
+    border-left: 4px solid #0066cc;
+    padding-left: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .subSpecialtyTitle {
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .courseList {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .courseItem {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 8px;
+  }
+  
+  .coursePrereqs {
+    font-style: italic;
+    color: #777;
+  }
+  
+  .addCourseButton {
+    background-color: #0066cc;
+    color: white;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .addCourseButton:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Input fields for course dialog */
+  .inputField {
+    margin-bottom: 15px;
+  }
+  
+  

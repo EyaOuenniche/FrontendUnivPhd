@@ -61,6 +61,7 @@ export default function HorizontalNavbar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      
     </Menu>
   );
 
@@ -81,6 +82,7 @@ export default function HorizontalNavbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
@@ -147,6 +149,12 @@ export default function HorizontalNavbar() {
               color="inherit"
             >
             </IconButton>
+            <MenuItem  style={{ color: 'white' }}>
+              My Universities
+            </MenuItem>
+            <MenuItem  style={{ color: 'white' }}>
+              Scholarships
+            </MenuItem>
             <IconButton
               size="large"
               edge="end"

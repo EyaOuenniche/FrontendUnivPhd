@@ -1,0 +1,155 @@
+/* Container for the form and program list */
+.step2-container {
+    padding: 30px;
+    
+    border-radius: 8px;
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2d3436;  /* Darker text for better contrast */
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Program card styling */
+  .program-card {
+    border: none;
+    padding: 20px;
+    background: linear-gradient(145deg, #ffffff, #e0e0e0); 
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Grid layout inside the card (full width for description) */
+  .program-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+  }
+  
+  /* Individual detail box */
+  .detail-box {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Input container */
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+
+ 
+  
+
+
+
+
+
+/* Input container */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+  }
+  
+  /* Style for input fields */
+  .input-field {
+    padding: 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px; /* Rounded corners for modern look */
+    background-color: #fafafa;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't mess with width */
+  }
+  
+  .input-field:focus {
+    border-color: #2980b9; /* Blue border on focus */
+    box-shadow: 0 0 8px rgba(41, 128, 185, 0.4); /* Soft focus glow */
+    outline: none;
+  }
+  
+  .input-field::placeholder {
+    color: #999; /* Lighter color for placeholder text */
+  }
+  
+  /* Add Program button */
+  .add-program-btn {
+    padding: 14px 32px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 30px; /* Round button for a sleek look */
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .add-program-btn:hover {
+    background-color: #3498db;
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  .add-program-btn:active {
+    transform: scale(1); /* Reset scale when button is clicked */
+  }
+  
+  .add-program-btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(41, 128, 185, 0.3); /* Focus effect */
+  }
+  
+  /* Toggle form button */
+  .toggle-form-btn {
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 30px; /* Same rounded button style */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: fit-content;
+    align-self: center;
+    margin-top: 20px;
+  }
+  
+  .toggle-form-btn:hover {
+    background-color: #3498db;
+    transform: scale(1.05);
+  }
+  
+  .toggle-form-btn:active {
+    transform: scale(1);
+  }
+  
+  .toggle-form-btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(41, 128, 185, 0.3);
+  }
+  
