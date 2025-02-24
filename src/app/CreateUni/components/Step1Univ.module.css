@@ -1,4 +1,4 @@
-/* ===== Step1Univ.module.css ===== */
+
 
 :root {
   --primary-color: #0078D4;
@@ -10,14 +10,13 @@
   --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* Input Wrapper for Better Layout */
 .inputGroup {
   display: flex;
   flex-direction: column;
   margin-bottom: 18px;
 }
 
-/* Labels */
+
 .inputLabel {
   font-size: 16px;
   font-weight: 600;
@@ -25,7 +24,6 @@
   margin-bottom: 5px;
 }
 
-/* Input Fields (Improved Design) */
 .inputField {
   padding: 14px;
   font-size: 16px;
@@ -39,7 +37,7 @@
   box-shadow: var(--shadow-light);
 }
 
-/* Focus & Hover Effects */
+
 .inputField:focus {
   border-color: var(--primary-color);
   background-color: #ffffff;

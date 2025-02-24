@@ -1,6 +1,4 @@
-/* Step6.module.css */
 
-/* Container */
 .container {
   font-family: Arial, sans-serif;
   margin: 20px;
@@ -11,7 +9,7 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header */
+
 .header {
   font-size: 2rem;
   font-weight: bold;
@@ -19,13 +17,12 @@
   margin-bottom: 20px;
 }
 
-/* Section */
 .section {
   margin-bottom: 20px;
   padding: 10px;
 }
 
-/* Section Title */
+
 .sectionTitle {
   font-size: 1.5rem;
   font-weight: bold;
@@ -33,7 +30,7 @@
   margin-bottom: 10px;
 }
 
-/* Program Card */
+
 .programCard {
   background: #f9f9f9;
   padding: 10px;
@@ -42,20 +39,20 @@
   margin-bottom: 15px;
 }
 
-/* Sub-Specialty */
+
 .subSpecialtyCard {
   margin-left: 15px;
   border-left: 4px solid #0078d4;
   padding-left: 10px;
 }
 
-/* Course List */
+
 .courseList {
   margin-top: 10px;
   padding-left: 15px;
 }
 
-/* Term Card */
+
 .termCard {
   margin-left: 15px;
   padding-left: 10px;
@@ -65,7 +62,6 @@
   padding: 10px;
 }
 
-/* Submit Button */
 .buttonContainer {
   text-align: center;
   margin-top: 20px;

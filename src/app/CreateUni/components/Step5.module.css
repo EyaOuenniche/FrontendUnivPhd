@@ -1,6 +1,4 @@
-/* Step5.module.css */
 
-/* Container for the entire component */
 .container {
     padding: 20px;
     font-family: Arial, sans-serif;
@@ -8,7 +6,7 @@
     margin: 0 auto;
 }
 
-/* Section Title */
+
 .sectionTitle {
     font-size: 1.8rem;
     font-weight: 600;
@@ -17,7 +15,7 @@
     text-align: center;
 }
 
-/* Program card */
+
 .programCard {
     background-color: #fff;
     padding: 15px;
@@ -26,14 +24,14 @@
     margin-bottom: 20px;
 }
 
-/* Program title */
+
 .programTitle {
     font-size: 1.5rem;
     color: #333;
     font-weight: 500;
 }
 
-/* Sub-specialty container */
+
 .subSpecialtyCard {
     margin-left: 20px;
     border-left: 4px solid #0078d4;
@@ -44,14 +42,14 @@
     border-radius: 8px;
 }
 
-/* Sub-specialty title */
+
 .subSpecialtyTitle {
     font-size: 1.3rem;
     font-weight: 500;
     color: #444;
 }
 
-/* Term container */
+
 .termCard {
     margin-left: 30px;
     padding: 10px;
@@ -61,21 +59,21 @@
     border-left: 4px solid #0078d4;
 }
 
-/* Term title */
+
 .termTitle {
     font-size: 1.2rem;
     font-weight: 500;
     color: #333;
 }
 
-/* Checkbox styling */
+
 .courseSelection {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
 }
 
-/* Add Term Button */
+
 .addTermButton {
     background-color: #0078d4;
     color: white;
