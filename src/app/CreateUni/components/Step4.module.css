@@ -1,78 +1,95 @@
 .container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    max-width: 900px;
-    margin: 0 auto;
-  }
+  width: 100%;
+}
+
+
+.subSpecialtyCard {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+
+
+
+.courseList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.courseCard {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid #cce7ff;
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
+  align-items: flex-start;
+  padding: 12px;
+  margin-bottom: 20px;
   
-  .sectionTitle {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 25px;
-  }
-  
-  .programCard {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .programTitle {
-    font-size: 1.5rem;
-    color: #444;
-    font-weight: 500;
-  }
-  
-  .subSpecialtyCard {
-    margin-left: 20px;
-    border-left: 4px solid #0066cc;
-    padding-left: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .subSpecialtyTitle {
-    font-size: 1.2rem;
-    color: #555;
-    font-weight: 500;
-  }
-  
-  .courseList {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .courseItem {
-    font-size: 1rem;
-    color: #444;
-    margin-bottom: 8px;
-  }
-  
-  .coursePrereqs {
-    font-style: italic;
-    color: #777;
-  }
-  
-  .addCourseButton {
-    background-color: #0066cc;
-    color: white;
-    padding: 8px 16px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .addCourseButton:hover {
-    background-color: #005bb5;
-  }
-  
-  /* Input fields for course dialog */
-  .inputField {
-    margin-bottom: 15px;
-  }
-  
-  
+}
+.courseContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.courseCard:hover {
+  transform: scale(1.02);
+  background-color: #f2f7ff;
+}
+
+.courseTitle {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.courseCode {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.courseCredits {
+  font-size: 0.9rem;
+  color: #666;
+}
+.coursePrerequisites {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+
+.deleteButton {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.deleteButton:hover {
+  transform: scale(1.1);
+  color: red;
+}
+
+.addButton {
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+.addButton:hover {
+  background-color: #0056b3;
+}

@@ -15,7 +15,7 @@ export interface Course {
     name: string;
     startDate?: string;
     endDate?: string;
-    courses: string[];  
+    courses: Course[];  
   }
   
   // A SubSpecialty object

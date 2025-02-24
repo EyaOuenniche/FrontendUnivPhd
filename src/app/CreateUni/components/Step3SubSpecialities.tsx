@@ -10,9 +10,12 @@ export default function Step3SubSpecialties({
 }: {
   programs: { id: string; name: string }[];
   subSpecialties: { [programId: string]: SubSpecialty[] };
-  setSubSpecialties: React.Dispatch<React.SetStateAction<{ [programId: string]: SubSpecialty[] }>>;
+  setSubSpecialties: React.Dispatch<
+    React.SetStateAction<{ [programId: string]: SubSpecialty[] }>
+  >;
 }) {
   const [newSubSpecialty, setNewSubSpecialty] = useState<{ [programId: string]: string }>({});
+  const [showForm, setShowForm] = useState<{ [programId: string]: boolean }>({});
 
   const handleAddSubSpecialty = (programId: string) => {
     const subName = newSubSpecialty[programId]?.trim();
@@ -31,40 +34,47 @@ export default function Step3SubSpecialties({
     }));
 
     setNewSubSpecialty((prev) => ({ ...prev, [programId]: "" }));
+    setShowForm((prev) => ({ ...prev, [programId]: false })); 
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Sub-Specialties</h2>
-
+    <div className={styles.step3Container}>
       {programs.map((prog) => (
         <div key={prog.id} className={styles.programCard}>
-          <h3 className={styles.programName}>{prog.name}</h3>
+          <h3 className={styles.programTitle}>{prog.name}</h3>
 
-          {/* Display Existing Sub-Specialties */}
+          
           <div className={styles.subSpecialtiesList}>
             {subSpecialties[prog.id]?.map((sub) => (
-              <div key={sub.id} className={styles.subSpecialtyItem}>
-                - {sub.name}
+              <div key={sub.id} className={styles.subSpecialtyBox}>
+                <span>{sub.name}</span>
               </div>
             ))}
           </div>
 
-          {/* Add New Sub-Specialty */}
-          <div className={styles.inputContainer}>
-            <input
-              type="text"
-              placeholder="Enter Sub-Specialty Name"
-              value={newSubSpecialty[prog.id] || ""}
-              onChange={(e) =>
-                setNewSubSpecialty({ ...newSubSpecialty, [prog.id]: e.target.value })
-              }
-              className={styles.input}
-            />
-            <button className={styles.addButton} onClick={() => handleAddSubSpecialty(prog.id)}>
-              <span className={styles.buttonText}>+</span> Add Sub-Specialty
+          {subSpecialties[prog.id]?.length > 0 && !showForm[prog.id] ? (
+            <button
+              className={styles.addButton}
+              onClick={() => setShowForm((prev) => ({ ...prev, [prog.id]: true }))}
+            >
+              + Add Sub-Specialty
             </button>
-          </div>
+          ) : (
+            <div className={styles.inputContainer}>
+              <input
+                type="text"
+                placeholder="Enter Sub-Specialty Name"
+                value={newSubSpecialty[prog.id] || ""}
+                onChange={(e) =>
+                  setNewSubSpecialty({ ...newSubSpecialty, [prog.id]: e.target.value })
+                }
+                className={styles.inputField}
+              />
+              <button className={styles.confirmButton} onClick={() => handleAddSubSpecialty(prog.id)}>
+                Add
+              </button>
+            </div>
+          )}
         </div>
       ))}
     </div>

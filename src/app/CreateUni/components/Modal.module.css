@@ -1,0 +1,93 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background: white;
+    padding: 25px;
+    width: 500px; 
+    max-width: 90vw;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .modal h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #002b5b;
+    margin-bottom: 10px;
+  }
+  
+  .form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.3s ease-in-out;
+  }
+  
+  .form input:focus {
+    border-color: #004080;
+    outline: none;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    gap: 10px;
+  }
+  
+  .actions button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .cancel {
+    background: #ddd;
+    color: black;
+  }
+  
+  .cancel:hover {
+    background: #bbb;
+  }
+  
+  .save {
+    background: #004080;
+    color: white;
+  }
+  
+  .save:hover {
+    background: #003366;
+  }
+  
+  .save:disabled {
+    background: #bbb;
+    cursor: not-allowed;
+  }
+  

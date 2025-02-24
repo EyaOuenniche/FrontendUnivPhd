@@ -1,8 +1,21 @@
 "use client";
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { FormDataShape } from "./types";
+import { Box, Typography } from "@mui/material";
+import { Program, SubSpecialty, Course, Term } from "./types";
 import styles from "./Step6.module.css";
+
+interface Step6Props {
+  universityInfo: {
+    universityName: string;
+    accreditation: string;
+    establishedYear: string;
+    location: string;
+  };
+  programs: Program[];
+  subSpecialties: { [programId: string]: SubSpecialty[] };
+  courses: { [subId: string]: Course[] };
+  terms: { [subId: string]: Term[] };
+}
 
 export default function Step6Review({
   universityInfo,
@@ -10,25 +23,14 @@ export default function Step6Review({
   subSpecialties,
   courses,
   terms,
-}: {
-  universityInfo: {
-    universityName: string;
-    accreditation: string;
-    establishedYear: string;
-    location: string;
-  };
-  programs: { id: string; name: string }[];
-  subSpecialties: { [programId: string]: { id: string; name: string }[] };
-  courses: { [subId: string]: { id: string; name: string; courseCode: string; credits: number; prerequisites: string[] }[] };
-  terms: { [subId: string]: { id: string; name: string; startDate?: string; endDate?: string; courses: string[] }[] };
-}) {
+}: Step6Props) {
   return (
     <Box className={styles.container}>
       <Typography variant="h4" className={styles.header}>
-        Review Your University Profile
+        🎓 Review Your University Profile
       </Typography>
 
-      {/* University Info Section */}
+     
       <Box className={styles.section}>
         <Typography className={styles.sectionTitle}>University Information</Typography>
         <Typography className={styles.text}><strong>Name:</strong> {universityInfo.universityName}</Typography>
@@ -37,80 +39,71 @@ export default function Step6Review({
         <Typography className={styles.text}><strong>Location:</strong> {universityInfo.location}</Typography>
       </Box>
 
-      {/* Programs Section */}
-      <Box className={styles.section}>
-        <Typography className={styles.sectionTitle}>Programs</Typography>
-        {programs.length === 0 ? (
-          <Typography>No programs added yet.</Typography>
-        ) : (
-          programs.map((prog) => (
-            <Box key={prog.id} className={styles.programCard}>
-              <Typography className={styles.programName}>{prog.name}</Typography>
+      
+      {programs.map((prog) => (
+        <Box key={prog.id} className={styles.section}>
+          <Typography className={styles.programName}>{prog.name}</Typography>
 
-              {/* Sub-Specialties */}
-              {subSpecialties[prog.id]?.length > 0 ? (
-                subSpecialties[prog.id].map((sub) => (
-                  <Box key={sub.id} className={styles.subSpecialtyCard}>
-                    <Typography className={styles.subSpecialtyTitle}>{sub.name}</Typography>
+          {subSpecialties[prog.id]?.map((sub) => (
+            <Box key={sub.id} className={styles.subSpecialtyCard}>
+              <Typography className={styles.subSpecialtyTitle}>{sub.name}</Typography>
 
-                    {/* Courses */}
-                    {courses[sub.id]?.length > 0 ? (
-                      <Box className={styles.courseList}>
-                        <Typography className={styles.subSpecialtyText}><strong>Courses:</strong></Typography>
-                        {courses[sub.id].map((c) => (
-                          <Typography key={c.id} className={styles.courseItem}>
-                            - {c.name} ({c.courseCode}, {c.credits} credits) 
-                            {c.prerequisites.length > 0 && (
-                              <em className={styles.prereqs}> [Prereqs: {c.prerequisites.join(", ")}]</em>
-                            )}
-                          </Typography>
-                        ))}
-                      </Box>
-                    ) : (
-                      <Typography>No courses added.</Typography>
-                    )}
-
-                    {/* Terms & Course Mapping */}
-                    {terms[sub.id]?.length > 0 ? (
-                      <Box className={styles.termList}>
-                        <Typography className={styles.subSpecialtyText}><strong>Terms:</strong></Typography>
-                        {terms[sub.id].map((t) => (
-                          <Box key={t.id} className={styles.termCard}>
-                            <Typography className={styles.termName}><strong>{t.name}</strong></Typography>
-                            {t.startDate && t.endDate && (
-                              <Typography className={styles.termDates}>({t.startDate} - {t.endDate})</Typography>
-                            )}
-                            <Box className={styles.termCourses}>
-                              {t.courses.length > 0 ? (
-                                t.courses.map((cid) => {
-                                  const courseObj = courses[sub.id].find((cc) => cc.id === cid);
-                                  return courseObj ? (
-                                    <Typography key={cid} className={styles.termCourseItem}>
-                                      - {courseObj.name} ({courseObj.courseCode})
-                                    </Typography>
-                                  ) : null;
-                                })
-                              ) : (
-                                <Typography>No courses assigned.</Typography>
-                              )}
-                            </Box>
-                          </Box>
-                        ))}
-                      </Box>
-                    ) : (
-                      <Typography>No terms added.</Typography>
-                    )}
-                  </Box>
-                ))
+             
+              {courses[sub.id]?.length > 0 ? (
+                <Box>
+                  <Typography className={styles.sectionTitle}>Courses:</Typography>
+                  <ul className={styles.courseList}>
+                    {courses[sub.id].map((c) => (
+                      <li key={c.id} className={styles.courseItem}>
+                        <strong>{c.name}</strong> ({c.courseCode || "No Code"}) - {c.credits} Credits
+                        {c.prerequisites.length > 0 && (
+                          <span className={styles.prereqs}> [Prereqs: {c.prerequisites.join(", ")}]</span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </Box>
               ) : (
-                <Typography>No sub-specialties added.</Typography>
+                <Typography className={styles.noItems}>No courses added.</Typography>
+              )}
+
+              
+              {terms[sub.id]?.length > 0 ? (
+                <Box>
+                  <Typography className={styles.sectionTitle}>Terms & Assigned Courses:</Typography>
+                  {terms[sub.id].map((t) => (
+                    <Box key={t.id} className={styles.termCard}>
+                      <Typography className={styles.termName}>{t.name}</Typography>
+                      {t.startDate && t.endDate && (
+                        <Typography className={styles.termDates}>({t.startDate} - {t.endDate})</Typography>
+                      )}
+                      
+                      
+                      {t.courses.length > 0 ? (
+                        <ul className={styles.courseList}>
+                          {t.courses.map((course) => (
+                            <li key={course.id} className={styles.courseItem}>
+                              <strong>{course.name}</strong> ({course.courseCode || "No Code"})  
+                              - {course.credits} Credits
+                              {course.prerequisites.length > 0 && (
+                                <span className={styles.prereqs}> [Prereqs: {course.prerequisites.join(", ")}]</span>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <Typography className={styles.noItems}>No courses assigned.</Typography>
+                      )}
+                    </Box>
+                  ))}
+                </Box>
+              ) : (
+                <Typography className={styles.noItems}>No terms added.</Typography>
               )}
             </Box>
-          ))
-        )}
-      </Box>
-
-     
+          ))}
+        </Box>
+      ))}
     </Box>
   );
 }

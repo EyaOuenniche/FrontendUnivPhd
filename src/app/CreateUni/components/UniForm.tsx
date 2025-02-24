@@ -148,7 +148,7 @@ export default function UniForm({
         {activeStep === steps.length ? (
           
           <Typography variant="h5" textAlign="center" color="success.main">
-            🎉 Thank you! Your information has been{" "}
+             Thank you! Your information has been{" "}
             {editMode ? "updated" : "submitted"}.
           </Typography>
         ) : (

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from "@mui/material";
 import { Course, Term } from "../components/types";
+import styles from "./Modal.module.css";
 
 interface ModalFormProps {
   open: boolean;
@@ -41,7 +42,7 @@ export default function ModalForm({ open, onClose, onSave, type }: ModalFormProp
         name: formData.name.trim(),
         startDate: formData.startDate || undefined,
         endDate: formData.endDate || undefined,
-        courses: [],
+        courses: [], 
       };
       onSave(newTerm);
     }
@@ -54,30 +55,55 @@ export default function ModalForm({ open, onClose, onSave, type }: ModalFormProp
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>{type === "course" ? "Add Course" : "Add Term"}</DialogTitle>
-      <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-        <TextField label={type === "course" ? "Course Name" : "Term Name"} name="name" value={formData.name} onChange={handleChange} fullWidth />
-        
-        {type === "course" ? (
-          <>
-            <TextField label="Course Code" name="courseCode" value={formData.courseCode ?? ""} onChange={handleChange} fullWidth />
-            <TextField label="Credits" name="credits" type="number" value={formData.credits} onChange={handleChange} fullWidth />
-            <TextField label="Prerequisites (comma-separated)" name="prerequisites" value={formData.prerequisites ?? ""} onChange={handleChange} fullWidth />
-          </>
-        ) : (
-          <>
-            <TextField label="Start Date" name="startDate" type="date" value={formData.startDate ?? ""} onChange={handleChange} fullWidth InputLabelProps={{ shrink: true }} />
-            <TextField label="End Date" name="endDate" type="date" value={formData.endDate ?? ""} onChange={handleChange} fullWidth InputLabelProps={{ shrink: true }} />
-          </>
-        )}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button variant="contained" onClick={handleSave} disabled={!formData.name.trim()}>
-          Save
-        </Button>
-      </DialogActions>
-    </Dialog>
+    open && (
+      <div className={styles.overlay} onClick={onClose}>
+        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+          <h2>{type === "course" ? "Add Course" : "Add Term"}</h2>
+          <div className={styles.form}>
+            <label>
+              {type === "course" ? "Course Name" : "Term Name"}
+              <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+            </label>
+
+            {type === "course" ? (
+              <>
+                <label>
+                  Course Code
+                  <input type="text" name="courseCode" value={formData.courseCode} onChange={handleChange} />
+                </label>
+                <label>
+                  Credits
+                  <input type="number" name="credits" value={formData.credits} onChange={handleChange} />
+                </label>
+                <label>
+                  Prerequisites (comma-separated)
+                  <input type="text" name="prerequisites" value={formData.prerequisites} onChange={handleChange} />
+                </label>
+              </>
+            ) : (
+              <>
+                <label>
+                  Start Date
+                  <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
+                </label>
+                <label>
+                  End Date
+                  <input type="date" name="endDate" value={formData.endDate} onChange={handleChange} />
+                </label>
+              </>
+            )}
+          </div>
+          <div className={styles.actions}>
+            <button className={styles.cancel} onClick={onClose}>
+              Cancel
+            </button>
+            <button className={styles.save} onClick={handleSave} disabled={!formData.name.trim()}>
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    )
   );
 }
+  
