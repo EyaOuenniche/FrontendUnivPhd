@@ -1,0 +1,93 @@
+/* Step5.module.css */
+
+/* Container for the entire component */
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Section Title */
+.sectionTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2C3E50;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Program card */
+.programCard {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Program title */
+.programTitle {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Sub-specialty container */
+.subSpecialtyCard {
+    margin-left: 20px;
+    border-left: 4px solid #0078d4;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Sub-specialty title */
+.subSpecialtyTitle {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #444;
+}
+
+/* Term container */
+.termCard {
+    margin-left: 30px;
+    padding: 10px;
+    background-color: #e9f5f9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid #0078d4;
+}
+
+/* Term title */
+.termTitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Checkbox styling */
+.courseSelection {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+/* Add Term Button */
+.addTermButton {
+    background-color: #0078d4;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.addTermButton:hover {
+    background-color: #005bb5;
+}

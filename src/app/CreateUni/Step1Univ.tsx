@@ -1,15 +1,33 @@
 "use client";
 import React from "react";
-import { FormDataShape } from "./types";
-import styles from "./Step1Univ.module.css"; 
+import styles from "./Step1Univ.module.css";
 
 export default function Step1University({
-  formData,
-  setFormData,
+  universityInfo,
+  setUniversityInfo,
 }: {
-  formData: FormDataShape;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataShape>>;
+  universityInfo: {
+    universityName: string;
+    accreditation: string;
+    establishedYear: string;
+    location: string;
+  };
+  setUniversityInfo: React.Dispatch<
+    React.SetStateAction<{
+      universityName: string;
+      accreditation: string;
+      establishedYear: string;
+      location: string;
+    }>
+  >;
 }) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUniversityInfo((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <div className={styles.step1Container}>
       <h2 className={styles.title}>University Info</h2>
@@ -19,11 +37,10 @@ export default function Step1University({
       </label>
       <input
         id="universityName"
+        name="universityName"
         type="text"
-        value={formData.universityName}
-        onChange={(e) =>
-          setFormData({ ...formData, universityName: e.target.value })
-        }
+        value={universityInfo.universityName}
+        onChange={handleChange}
         className={styles.inputField}
       />
 
@@ -32,11 +49,10 @@ export default function Step1University({
       </label>
       <input
         id="accreditation"
+        name="accreditation"
         type="text"
-        value={formData.accreditation}
-        onChange={(e) =>
-          setFormData({ ...formData, accreditation: e.target.value })
-        }
+        value={universityInfo.accreditation}
+        onChange={handleChange}
         className={styles.inputField}
       />
 
@@ -45,11 +61,10 @@ export default function Step1University({
       </label>
       <input
         id="establishedYear"
+        name="establishedYear"
         type="text"
-        value={formData.establishedYear}
-        onChange={(e) =>
-          setFormData({ ...formData, establishedYear: e.target.value })
-        }
+        value={universityInfo.establishedYear}
+        onChange={handleChange}
         className={styles.inputField}
       />
 
@@ -58,11 +73,10 @@ export default function Step1University({
       </label>
       <input
         id="location"
+        name="location"
         type="text"
-        value={formData.location}
-        onChange={(e) =>
-          setFormData({ ...formData, location: e.target.value })
-        }
+        value={universityInfo.location}
+        onChange={handleChange}
         className={styles.inputField}
       />
     </div>

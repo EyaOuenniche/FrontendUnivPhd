@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Box, Typography, Stepper, Step, StepLabel, Button } from "@mui/material";
-import { FormDataShape } from "./types";
+import { FormDataShape, Program, SubSpecialty, Course, Term } from "./types";
 
 import Step1University from "./Step1Univ";
 import Step2Programs from "./Step2Programs";
@@ -19,53 +19,63 @@ const steps = [
   "Review",
 ];
 
+const stepComponents = [
+  Step1University,
+  Step2Programs,
+  Step3SubSpecialties,
+  Step4Courses,
+  Step5TermsMapping,
+  Step6Review,
+];
+
 export default function MultiStepWizard() {
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [formData, setFormData] = useState<FormDataShape>({
+
+  // Split state into smaller, step-specific states
+  const [universityInfo, setUniversityInfo] = useState({
     universityName: "",
     accreditation: "",
     establishedYear: "",
     location: "",
-    programs: [],
+  });
+
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [subSpecialties, setSubSpecialties] = useState<{ [key: string]: SubSpecialty[] }>({});
+  const [courses, setCourses] = useState<{ [key: string]: Course[] }>({});
+  const [terms, setTerms] = useState<{ [key: string]: Term[] }>({});
+
+  // Function to get the complete data before submission
+  const getFinalFormData = (): FormDataShape => ({
+    ...universityInfo,
+    programs: programs.map((program) => ({
+      ...program,
+      subSpecialties: subSpecialties[program.id] || [],
+    })),
   });
 
   const handleNext = () => setActiveStep((prev) => prev + 1);
   const handleBack = () => setActiveStep((prev) => prev - 1);
 
   const handleSubmit = () => {
-    console.log("Submitted Data:", formData);
-    setActiveStep((prev) => prev + 1); 
+    const finalData = getFinalFormData();
+    console.log("Submitted Data:", finalData);
+    setActiveStep((prev) => prev + 1);
   };
 
-  function getStepContent(stepIndex: number) {
-    switch (stepIndex) {
-      case 0:
-        return <Step1University formData={formData} setFormData={setFormData} />;
-      case 1:
-        return <Step2Programs formData={formData} setFormData={setFormData} />;
-      case 2:
-        return <Step3SubSpecialties formData={formData} setFormData={setFormData} />;
-      case 3:
-        return <Step4Courses formData={formData} setFormData={setFormData} />;
-      case 4:
-        return <Step5TermsMapping formData={formData} setFormData={setFormData} />;
-      case 5:
-        return <Step6Review formData={formData} />;
-      default:
-        return <div style={{color:"red"}}> Unknown Step</div>
-    }
-  }
+  const StepComponent = stepComponents[activeStep];
 
   return (
     <Box sx={{ maxWidth: 900, mx: "auto", mt: 4, padding: 3 }}>
       <Typography variant="h4" textAlign="center" mb={4} fontWeight="600" color="#2C3E50">
-       Create your University Profile
+        Create your University Profile
       </Typography>
 
       <Stepper activeStep={activeStep} sx={{ mb: 5 }} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel sx={{ fontWeight: "bold", color: "#3498db" }}>{label}</StepLabel>
+        {steps.map((label, index) => (
+          <Step key={index}>
+            <StepLabel StepIconProps={{ style: { color: activeStep >= index ? "#3498db" : "#bbb" } }}>
+              {label}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -76,7 +86,18 @@ export default function MultiStepWizard() {
         </Typography>
       ) : (
         <>
-          {getStepContent(activeStep)}
+          <StepComponent
+            universityInfo={universityInfo}
+            setUniversityInfo={setUniversityInfo}
+            programs={programs}
+            setPrograms={setPrograms}
+            subSpecialties={subSpecialties}
+            setSubSpecialties={setSubSpecialties}
+            courses={courses}
+            setCourses={setCourses}
+            terms={terms}
+            setTerms={setTerms}
+          />
 
           <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
             {activeStep > 0 && (
@@ -92,7 +113,14 @@ export default function MultiStepWizard() {
               <Button
                 variant="contained"
                 onClick={handleNext}
-                sx={{ fontWeight: "bold", padding: "8px 16px", borderRadius: 3, backgroundColor: "#3498db", textTransform: "none" }}
+                sx={{
+                  fontWeight: "bold",
+                  padding: "8px 16px",
+                  borderRadius: 3,
+                  backgroundColor: "#3498db",
+                  ":hover": { backgroundColor: "#2980b9" },
+                  textTransform: "none",
+                }}
               >
                 Next
               </Button>
@@ -100,7 +128,14 @@ export default function MultiStepWizard() {
               <Button
                 variant="contained"
                 onClick={handleSubmit}
-                sx={{ fontWeight: "bold", padding: "8px 16px", borderRadius: 3, backgroundColor: "#2ECC71", textTransform: "none" }}
+                sx={{
+                  fontWeight: "bold",
+                  padding: "8px 16px",
+                  borderRadius: 3,
+                  backgroundColor: "#2ECC71",
+                  ":hover": { backgroundColor: "#27AE60" },
+                  textTransform: "none",
+                }}
               >
                 Submit
               </Button>

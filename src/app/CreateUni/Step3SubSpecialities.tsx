@@ -1,72 +1,67 @@
 "use client";
 import React, { useState } from "react";
-import { FormDataShape, SubSpecialty } from "./types";
-import styles from "./Step3.module.css"; 
-
+import { SubSpecialty } from "./types";
+import styles from "./Step3.module.css";
 
 export default function Step3SubSpecialties({
-  formData,
-  setFormData,
+  programs,
+  subSpecialties,
+  setSubSpecialties,
 }: {
-  formData: FormDataShape;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataShape>>;
+  programs: { id: string; name: string }[];
+  subSpecialties: { [programId: string]: SubSpecialty[] };
+  setSubSpecialties: React.Dispatch<React.SetStateAction<{ [programId: string]: SubSpecialty[] }>>;
 }) {
- 
-  const [subNames, setSubNames] = useState<{ [programId: string]: string }>({});
+  const [newSubSpecialty, setNewSubSpecialty] = useState<{ [programId: string]: string }>({});
 
   const handleAddSubSpecialty = (programId: string) => {
-    const subName = (subNames[programId] || "").trim();
+    const subName = newSubSpecialty[programId]?.trim();
     if (!subName) return;
 
-    const updatedPrograms = formData.programs.map((p) => {
-      if (p.id === programId) {
-        const newSub: SubSpecialty = {
-          id: String(Date.now()),
-          name: subName,
-          courses: [],
-          terms: [],
-        };
-        return { ...p, subSpecialties: [newSub, ...p.subSpecialties] }; 
-      }
-      return p;
-    });
-    setFormData({ ...formData, programs: updatedPrograms });
+    const newSub: SubSpecialty = {
+      id: String(Date.now()),
+      name: subName,
+      courses: [],
+      terms: [],
+    };
 
-    
-    setSubNames({ ...subNames, [programId]: "" });
+    setSubSpecialties((prev) => ({
+      ...prev,
+      [programId]: prev[programId] ? [newSub, ...prev[programId]] : [newSub],
+    }));
+
+    setNewSubSpecialty((prev) => ({ ...prev, [programId]: "" }));
   };
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Sub-Specialties</h2>
-      {formData.programs.map((prog) => (
+
+      {programs.map((prog) => (
         <div key={prog.id} className={styles.programCard}>
           <h3 className={styles.programName}>{prog.name}</h3>
 
-          
+          {/* Display Existing Sub-Specialties */}
           <div className={styles.subSpecialtiesList}>
-            {prog.subSpecialties.map((sub) => (
+            {subSpecialties[prog.id]?.map((sub) => (
               <div key={sub.id} className={styles.subSpecialtyItem}>
                 - {sub.name}
               </div>
             ))}
           </div>
 
-         
+          {/* Add New Sub-Specialty */}
           <div className={styles.inputContainer}>
             <input
               type="text"
               placeholder="Enter Sub-Specialty Name"
-              value={subNames[prog.id] || ""}
+              value={newSubSpecialty[prog.id] || ""}
               onChange={(e) =>
-                setSubNames({ ...subNames, [prog.id]: e.target.value })
+                setNewSubSpecialty({ ...newSubSpecialty, [prog.id]: e.target.value })
               }
               className={styles.input}
             />
-            <button
-              className={styles.addButton}
-              onClick={() => handleAddSubSpecialty(prog.id)}
-            >
+            <button className={styles.addButton} onClick={() => handleAddSubSpecialty(prog.id)}>
               <span className={styles.buttonText}>+</span> Add Sub-Specialty
             </button>
           </div>

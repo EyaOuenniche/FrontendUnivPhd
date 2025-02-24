@@ -1,9 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Typography, Button, Dialog, DialogTitle, DialogContent,
-  DialogActions, TextField } from "@mui/material";
-
-import { FormDataShape, Term } from "./types";
+import { Box, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Checkbox, FormControlLabel } from "@mui/material";
+import { Term, Course, SubSpecialty } from "./types";
+import styles from "./Step5.module.css";
 
 /** Dialog for Adding a Term */
 function AddTermDialog({
@@ -15,49 +14,42 @@ function AddTermDialog({
   onClose: () => void;
   onSave: (term: Term) => void;
 }) {
-  const [name, setName] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [termData, setTermData] = useState({
+    name: "",
+    startDate: "",
+    endDate: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTermData({ ...termData, [e.target.name]: e.target.value });
+  };
 
   const handleSave = () => {
+    if (!termData.name.trim()) return;
     const newTerm: Term = {
       id: String(Date.now()),
-      name: name.trim(),
-      startDate,
-      endDate,
+      name: termData.name.trim(),
+      startDate: termData.startDate || undefined,
+      endDate: termData.endDate || undefined,
       courses: [],
     };
+
     onSave(newTerm);
     onClose();
+    setTermData({ name: "", startDate: "", endDate: "" });
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>Add Term</DialogTitle>
       <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-        <TextField
-          label="Term Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
-          label="Start Date"
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          InputLabelProps={{ shrink: true }}
-        />
-        <TextField
-          label="End Date"
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          InputLabelProps={{ shrink: true }}
-        />
+        <TextField label="Term Name" name="name" value={termData.name} onChange={handleChange} fullWidth />
+        <TextField label="Start Date" name="startDate" type="date" value={termData.startDate} onChange={handleChange} fullWidth InputLabelProps={{ shrink: true }} />
+        <TextField label="End Date" name="endDate" type="date" value={termData.endDate} onChange={handleChange} fullWidth InputLabelProps={{ shrink: true }} />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button variant="contained" onClick={handleSave} disabled={!name.trim()}>
+        <Button variant="contained" onClick={handleSave} disabled={!termData.name.trim()}>
           Save
         </Button>
       </DialogActions>
@@ -67,152 +59,108 @@ function AddTermDialog({
 
 /** STEP 5: TERMS & MAPPING */
 export default function Step5TermsMapping({
-  formData,
-  setFormData,
+  programs,
+  subSpecialties,
+  terms,
+  setTerms,
+  courses,
 }: {
-  formData: FormDataShape;
-  setFormData: React.Dispatch<React.SetStateAction<FormDataShape>>;
+  programs: { id: string; name: string }[];
+  subSpecialties: { [programId: string]: SubSpecialty[] };
+  terms: { [subId: string]: Term[] };
+  setTerms: React.Dispatch<React.SetStateAction<{ [subId: string]: Term[] }>>;
+  courses: { [subId: string]: Course[] };
 }) {
   const [addTermOpen, setAddTermOpen] = useState(false);
-  const [targetSubForTerm, setTargetSubForTerm] = useState<{
-    programId: string;
-    subId: string;
-  } | null>(null);
+  const [targetSubId, setTargetSubId] = useState<string | null>(null);
 
   const handleSaveTerm = (term: Term) => {
-    if (!targetSubForTerm) return;
-    const { programId, subId } = targetSubForTerm;
-    const updatedPrograms = formData.programs.map((p) => {
-      if (p.id === programId) {
-        return {
-          ...p,
-          subSpecialties: p.subSpecialties.map((s) => {
-            if (s.id === subId) {
-              return { ...s, terms: [...s.terms, term] };
-            }
-            return s;
-          }),
-        };
-      }
-      return p;
-    });
-    setFormData({ ...formData, programs: updatedPrograms });
+    if (!targetSubId) return;
+    setTerms((prev) => ({
+      ...prev,
+      [targetSubId]: prev[targetSubId] ? [...prev[targetSubId], term] : [term],
+    }));
+    setAddTermOpen(false);
   };
 
-  const handleToggleCourseInTerm = (
-    programId: string,
-    subId: string,
-    termId: string,
-    courseId: string
-  ) => {
-    const updatedPrograms = formData.programs.map((p) => {
-      if (p.id === programId) {
-        return {
-          ...p,
-          subSpecialties: p.subSpecialties.map((s) => {
-            if (s.id === subId) {
-              return {
-                ...s,
-                terms: s.terms.map((t) => {
-                  if (t.id === termId) {
-                    let newCourses = [...t.courses];
-                    const idx = newCourses.indexOf(courseId);
-                    if (idx >= 0) {
-                      newCourses.splice(idx, 1);
-                    } else {
-                      newCourses.push(courseId);
-                    }
-                    return { ...t, courses: newCourses };
-                  }
-                  return t;
-                }),
-              };
-            }
-            return s;
-          }),
-        };
-      }
-      return p;
-    });
-    setFormData({ ...formData, programs: updatedPrograms });
+  const handleToggleCourseInTerm = (subId: string, termId: string, courseId: string) => {
+    setTerms((prev) => ({
+      ...prev,
+      [subId]: prev[subId].map((t) => 
+        t.id === termId ? { ...t, courses: t.courses.includes(courseId) ? t.courses.filter((id) => id !== courseId) : [...t.courses, courseId] } : t
+      ),
+    }));
   };
 
   return (
-    <Box>
-      <Typography variant="h6" sx={{ mb: 2 }}>
-        Terms & Mapping
+    <Box className={styles.container}>
+      <Typography variant="h5" className={styles.sectionTitle}>
+        Terms & Course Mapping
       </Typography>
-      {formData.programs.map((prog) => (
-        <Box key={prog.id} sx={{ border: "1px solid #ccc", mb: 2, p: 1 }}>
-          <Typography variant="subtitle1">{prog.name}</Typography>
 
-          {prog.subSpecialties.map((sub) => (
-            <Box
-              key={sub.id}
-              sx={{
-                ml: 2,
-                p: 1,
-                borderLeft: "4px solid #999",
-                mb: 2,
-              }}
-            >
-              <Typography>{sub.name}</Typography>
+      {programs.length === 0 ? (
+        <Typography>No programs available. Please add a program first.</Typography>
+      ) : (
+        programs.map((prog) => (
+          <Box key={prog.id} className={styles.programCard}>
+            <Typography className={styles.programTitle}>{prog.name}</Typography>
 
-              {sub.terms.map((term) => (
-                <Box key={term.id} sx={{ border: "1px solid #ddd", p: 1, mb: 1 }}>
-                  <strong>
-                    {term.name}{" "}
-                    {term.startDate && term.endDate
-                      ? (`${term.startDate} to ${term.endDate}`)
-                      : ""}
-                  </strong>
-                  <Box sx={{ ml: 2 }}>
-                    {sub.courses.map((course) => {
-                      const isChecked = term.courses.includes(course.id);
-                      return (
-                        <Box key={course.id}>
-                          <label>
-                            <input
-                              type="checkbox"
-                              checked={isChecked}
-                              onChange={() =>
-                                handleToggleCourseInTerm(
-                                  prog.id,
-                                  sub.id,
-                                  term.id,
-                                  course.id
-                                )
+            {!subSpecialties[prog.id] || subSpecialties[prog.id].length === 0 ? (
+              <Typography>No sub-specialties available. Please add a sub-specialty first.</Typography>
+            ) : (
+              subSpecialties[prog.id].map((sub) => (
+                <Box key={sub.id} className={styles.subSpecialtyCard}>
+                  <Typography className={styles.subSpecialtyTitle}>{sub.name}</Typography>
+
+                  {/* List Terms */}
+                  {terms[sub.id] && terms[sub.id].length > 0 ? (
+                    terms[sub.id].map((term) => (
+                      <Box key={term.id} className={styles.termCard}>
+                        <Typography className={styles.termTitle}>
+                          {term.name} ({term.startDate} - {term.endDate})
+                        </Typography>
+
+                        {/* Course Selection */}
+                        <Box>
+                          {courses[sub.id]?.map((course) => (
+                            <FormControlLabel
+                              key={course.id}
+                              control={
+                                <Checkbox
+                                  checked={term.courses.includes(course.id)}
+                                  onChange={() => handleToggleCourseInTerm(sub.id, term.id, course.id)}
+                                />
                               }
+                              label={`${course.name} (${course.courseCode})`}
                             />
-                            {course.name} ({course.courseCode})
-                          </label>
+                          ))}
                         </Box>
-                      );
-                    })}
-                  </Box>
+                      </Box>
+                    ))
+                  ) : (
+                    <Typography>No terms added yet.</Typography>
+                  )}
+
+                  {/* Add Term Button */}
+                  <Button
+                    variant="contained"
+                    className={styles.addTermButton}
+                    onClick={() => {
+                      setTargetSubId(sub.id);
+                      setAddTermOpen(true);
+                    }}
+                  >
+                    Add Term
+                  </Button>
                 </Box>
-              ))}
+              ))
+            )}
+          </Box>
+        ))
+      )}
 
-              <Button
-                variant="outlined"
-                onClick={() => {
-                  setTargetSubForTerm({ programId: prog.id, subId: sub.id });
-                  setAddTermOpen(true);
-                }}
-              >
-                Add Term
-              </Button>
-            </Box>
-          ))}
-        </Box>
-      ))}
-
-      <AddTermDialog
-        open={addTermOpen}
-        onClose={() => setAddTermOpen(false)}
-        onSave={handleSaveTerm}
-      />
+      {/* Term Dialog */}
+      <AddTermDialog open={addTermOpen} onClose={() => setAddTermOpen(false)} onSave={handleSaveTerm} />
     </Box>
   );
 }
-
