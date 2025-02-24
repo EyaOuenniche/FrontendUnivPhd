@@ -1,14 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import { Box, Typography, Stepper, Step, StepLabel, Button } from "@mui/material";
-import { FormDataShape, Program, SubSpecialty, Course, Term } from "./types";
+import { Box, Typography, Stepper, Step, StepLabel } from "@mui/material";
+import { FormDataShape, Program, SubSpecialty, Course, Term } from "./components/types";
 
-import Step1University from "./Step1Univ";
-import Step2Programs from "./Step2Programs";
-import Step3SubSpecialties from "./Step3SubSpecialities";
-import Step4Courses from "./Step4Courses";
-import Step5TermsMapping from "./Step5Terms";
-import Step6Review from "./Step6Review";
+import Step1University from "./components/Step1Univ";
+import Step2Programs from "./components/Step2Programs";
+import Step3SubSpecialties from "./components/Step3SubSpecialities";
+import Step4Courses from "./components/Step4Courses";
+import Step5TermsMapping from "./components/Step5Terms";
+import Step6Review from "./components/Step6Review";
+import styles from "./StepperForm.module.css";
 
 const steps = [
   "University Info",
@@ -28,10 +29,10 @@ const stepComponents = [
   Step6Review,
 ];
 
-export default function MultiStepWizard() {
+export default function UniForm() {
   const [activeStep, setActiveStep] = useState<number>(0);
 
-  // Split state into smaller, step-specific states
+  // Split state for better performance
   const [universityInfo, setUniversityInfo] = useState({
     universityName: "",
     accreditation: "",
@@ -44,7 +45,7 @@ export default function MultiStepWizard() {
   const [courses, setCourses] = useState<{ [key: string]: Course[] }>({});
   const [terms, setTerms] = useState<{ [key: string]: Term[] }>({});
 
-  // Function to get the complete data before submission
+  // Function to get final data
   const getFinalFormData = (): FormDataShape => ({
     ...universityInfo,
     programs: programs.map((program) => ({
@@ -65,84 +66,73 @@ export default function MultiStepWizard() {
   const StepComponent = stepComponents[activeStep];
 
   return (
-    <Box sx={{ maxWidth: 900, mx: "auto", mt: 4, padding: 3 }}>
-      <Typography variant="h4" textAlign="center" mb={4} fontWeight="600" color="#2C3E50">
-        Create your University Profile
-      </Typography>
-
-      <Stepper activeStep={activeStep} sx={{ mb: 5 }} alternativeLabel>
-        {steps.map((label, index) => (
-          <Step key={index}>
-            <StepLabel StepIconProps={{ style: { color: activeStep >= index ? "#3498db" : "#bbb" } }}>
-              {label}
-            </StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-
-      {activeStep === steps.length ? (
-        <Typography variant="h5" textAlign="center" sx={{ fontWeight: "500", color: "#2ECC71" }}>
-          Thank you! Your information has been submitted.
+    <div className={styles.stepperPage}>
+      <div className={styles.stepperContainer}>
+        <Typography className={styles.stepperTitle}>
+          Create Your University Profile
         </Typography>
-      ) : (
-        <>
-          <StepComponent
-            universityInfo={universityInfo}
-            setUniversityInfo={setUniversityInfo}
-            programs={programs}
-            setPrograms={setPrograms}
-            subSpecialties={subSpecialties}
-            setSubSpecialties={setSubSpecialties}
-            courses={courses}
-            setCourses={setCourses}
-            terms={terms}
-            setTerms={setTerms}
-          />
 
-          <Box sx={{ display: "flex", justifyContent: "space-between", mt: 4 }}>
-            {activeStep > 0 && (
-              <Button
-                onClick={handleBack}
-                variant="outlined"
-                sx={{ fontWeight: "bold", padding: "8px 16px", borderRadius: 3, textTransform: "none" }}
-              >
-                Back
-              </Button>
-            )}
-            {activeStep < steps.length - 1 ? (
-              <Button
-                variant="contained"
-                onClick={handleNext}
-                sx={{
-                  fontWeight: "bold",
-                  padding: "8px 16px",
-                  borderRadius: 3,
-                  backgroundColor: "#3498db",
-                  ":hover": { backgroundColor: "#2980b9" },
-                  textTransform: "none",
-                }}
-              >
-                Next
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                onClick={handleSubmit}
-                sx={{
-                  fontWeight: "bold",
-                  padding: "8px 16px",
-                  borderRadius: 3,
-                  backgroundColor: "#2ECC71",
-                  ":hover": { backgroundColor: "#27AE60" },
-                  textTransform: "none",
-                }}
-              >
-                Submit
-              </Button>
-            )}
-          </Box>
-        </>
-      )}
-    </Box>
+        {/* Improved Stepper Layout */}
+        <div className={styles.stepperWrapper}>
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((label, index) => (
+              <Step key={index}>
+                <StepLabel
+                  StepIconProps={{
+                    style: {
+                      color: activeStep >= index ? "#0078D4" : "#ddd",
+                      transition: "color 0.3s ease-in-out",
+                    },
+                  }}
+                  className={styles.stepperLabel}
+                >
+                  {label}
+                </StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+
+        {/* Step Content */}
+        {activeStep === steps.length ? (
+          <Typography variant="h5" textAlign="center" color="success.main">
+            🎉 Thank you! Your information has been submitted.
+          </Typography>
+        ) : (
+          <>
+            <StepComponent
+              universityInfo={universityInfo}
+              setUniversityInfo={setUniversityInfo}
+              programs={programs}
+              setPrograms={setPrograms}
+              subSpecialties={subSpecialties}
+              setSubSpecialties={setSubSpecialties}
+              courses={courses}
+              setCourses={setCourses}
+              terms={terms}
+              setTerms={setTerms}
+            />
+
+            {/* Navigation Buttons */}
+            <Box className={styles.stepperButtons}>
+              {activeStep > 0 && (
+                <button className={styles.secondaryButton} onClick={handleBack}>
+                  Back
+                </button>
+              )}
+              {activeStep < steps.length - 1 ? (
+                <button className={styles.primaryButton} onClick={handleNext}>
+                  Next
+                </button>
+              ) : (
+                <button className={styles.primaryButton} onClick={handleSubmit}>
+                  Submit
+                </button>
+              )}
+            </Box>
+          </>
+        )}
+      </div>
+    </div>
   );
 }

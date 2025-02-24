@@ -1,85 +1,116 @@
+/* ===== StepperForm.module.css ===== */
 
-/* Wizard container */
-.wizard-container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: var(--color-surface);
-    border-radius: var(--base-radius);
-    box-shadow: var(--base-shadow);
-    padding: 2rem;
-}
-
-/* Title */
-.wizard-title {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-    text-align: center;
-    color: var(--color-primary);
+:root {
+    --primary-color: #0078D4;
+    --primary-dark: #005bb5;
+    --secondary-color: #FF6F61;
+    --secondary-dark: #E24E42;
+    --light-gray: #F4F6F8;
+    --text-color: #2C3E50;
+    --border-radius: 12px;
+    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* Stepper Custom Styles */
-.my-custom-stepper {
-    margin-bottom: 2rem;
-}
-.my-custom-stepper .MuiStepIcon-root.Mui-active {
-    color: var(--color-primary);
-}
-.my-custom-stepper .MuiStepIcon-root.Mui-completed {
-    color: var(--color-accent);
+/* Full Page Background */
+.stepperPage {
+    background: linear-gradient(135deg, #E3F2FD, #FCE4EC);
+    font-family: "Inter", sans-serif;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 60px 20px;
 }
 
-/* Inputs */
-input[type="text"],
-input[type="number"],
-textarea {
+/* Main Form Container */
+.stepperContainer {
     width: 100%;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    border: 1px solid #d1d5da;
-    border-radius: 6px;
-    transition: border-color 0.2s;
+    max-width: 1100px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    padding: 50px;
+    animation: fadeIn 0.6s ease-in-out;
 }
 
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
+/* Stepper Header */
+.stepperTitle {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Stepper Styling */
+.stepperWrapper {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.stepperLabel {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--text-color) !important;
 }
 
 /* Buttons */
-button {
-    display: inline-block;
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-right: 8px;
-    transition: background-color 0.2s, transform 0.1s;
+.stepperButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
 }
 
-button:hover {
-    opacity: 0.9;
+/* Primary Button */
+.primaryButton {
+    background: var(--primary-color);
+    color: white;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
-button:active {
+
+.primaryButton:hover {
+    background: var(--primary-dark);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.primaryButton:active {
     transform: scale(0.98);
 }
 
-/* Custom Button Styles */
-.btn-primary {
-    background: var(--color-primary);
-    color: #fff;
+/* Secondary Button */
+.secondaryButton {
+    background: var(--secondary-color);
+    color: white;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 }
 
-.btn-secondary {
-    background: #e4e7eb;
-    color: var(--color-text);
+.secondaryButton:hover {
+    background: var(--secondary-dark);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
 }
 
-.btn-accent {
-    background: var(--color-accent);
-    color: #fff;
+.secondaryButton:active {
+    transform: scale(0.98);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

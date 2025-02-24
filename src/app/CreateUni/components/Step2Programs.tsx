@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Program } from "./types";
+import { Program } from "../components/types"
 import styles from "./Step2.module.css"; 
 
 export default function Step2Programs({
