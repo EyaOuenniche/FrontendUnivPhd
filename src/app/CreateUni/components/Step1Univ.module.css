@@ -1,78 +1,62 @@
-/* Container for the entire form */
-.step1Container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 35px;
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 750px;
-    margin: 40px auto;
-    font-family: 'Inter', sans-serif;
-    color: #333;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .step1Container:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Title */
-  .title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 24px;
-    text-align: center;
-    letter-spacing: 1px;
-  }
-  
-  /* Label for the input fields */
+/* ===== Step1Univ.module.css ===== */
+
+:root {
+  --primary-color: #0078D4;
+  --primary-dark: #005bb5;
+  --text-color: #2C3E50;
+  --background-light: #F9FAFB;
+  --border-radius: 12px;
+  --shadow-light: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Input Wrapper for Better Layout */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+/* Labels */
+.inputLabel {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+/* Input Fields (Improved Design) */
+.inputField {
+  padding: 14px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: var(--border-radius);
+  background-color: var(--background-light);
+  color: var(--text-color);
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  box-shadow: var(--shadow-light);
+}
+
+/* Focus & Hover Effects */
+.inputField:focus {
+  border-color: var(--primary-color);
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+.inputField:hover {
+  border-color: var(--primary-dark);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .inputLabel {
-    font-size: 1rem;
-    color: #34495e;
-    margin-bottom: 8px;
-    font-weight: 500;
+      font-size: 14px;
   }
-  
-  /* Input fields */
+
   .inputField {
-    padding: 16px;
-    font-size: 1rem;
-    border: 2px solid #bdc3c7;
-    border-radius: 10px;
-    background-color: #f4f6f7;
-    color: #2c3e50;
-    margin-bottom: 18px;
-    width: 100%;
-    transition: all 0.3s ease-in-out;
-    box-sizing: border-box;
-    outline: none;
+      font-size: 14px;
   }
-  
-  .inputField:focus {
-    border-color: #3498db;
-    background-color: #ffffff;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
-  }
-  
-  /* Hover effect for input fields */
-  .inputField:hover {
-    border-color: #3498db;
-  }
-  
-  /* Input field focus effect */
-  .inputField:focus-visible {
-    outline: none;
-  }
-  
-  /* For input fields with icons or extra features (optional) */
-  .inputFieldWithIcon {
-    padding-left: 35px;
-    position: relative;
-  }
-  
-  /* Additional styling for error states or validation feedback can be added here */
-  
+}

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Program } from "../components/types"
-import styles from "./Step2.module.css"; 
+import { Program } from "./types";
+import styles from "./Step2.module.css";
 
 export default function Step2Programs({
   programs,
@@ -10,7 +10,7 @@ export default function Step2Programs({
   programs: Program[];
   setPrograms: React.Dispatch<React.SetStateAction<Program[]>>;
 }) {
-  const [programData, setProgramData] = useState({
+  const [newProgram, setNewProgram] = useState({
     name: "",
     description: "",
     degree: "",
@@ -19,119 +19,75 @@ export default function Step2Programs({
     tuition: "",
   });
 
+  const [showForm, setShowForm] = useState(programs.length === 0); 
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setProgramData({ ...programData, [e.target.name]: e.target.value });
+    setNewProgram({ ...newProgram, [e.target.name]: e.target.value });
   };
 
   const handleAddProgram = () => {
-    if (!programData.name.trim()) return; 
+    if (!newProgram.name.trim()) return;
 
-    const newProgram: Program = {
+    const program: Program = {
       id: String(Date.now()),
-      ...programData,
-      tuition: parseFloat(programData.tuition) || 0,
+      name: newProgram.name.trim(),
+      description: newProgram.description.trim(),
+      degree: newProgram.degree.trim(),
+      admissionRequirement: newProgram.admissionRequirement.trim(),
+      applicationProcedure: newProgram.applicationProcedure.trim(),
+      tuition: Number(newProgram.tuition),
       subSpecialties: [],
     };
 
-    setPrograms((prev) => [newProgram, ...prev]);
-    setProgramData({ name: "", description: "", degree: "", admissionRequirement: "", applicationProcedure: "", tuition: "" });
+    setPrograms([...programs, program]);
+    setNewProgram({ name: "", description: "", degree: "", admissionRequirement: "", applicationProcedure: "", tuition: "" });
+    setShowForm(false); 
   };
 
   return (
-    <div className={styles["step2-container"]}>
-      <h2 className={styles.title}>Programs</h2>
-
-      {/* List of Existing Programs */}
-      {programs.length > 0 && (
-        <div className={styles["program-grid"]}>
-          {programs.map((prog) => (
-            <div key={prog.id} className={styles["program-card"]}>
-              <h3>{prog.name}</h3>
-              <p><em>{prog.degree}</em></p>
-
-              <div className={styles["program-details"]}>
-                <div className={styles["detail-box"]}>
-                  <strong>Description:</strong>
-                  <p>{prog.description}</p>
-                </div>
-
-                <div className={styles["detail-box"]}>
-                  <strong>Admission Requirement:</strong>
-                  <p>{prog.admissionRequirement}</p>
-                </div>
-
-                <div className={styles["detail-box"]}>
-                  <strong>Application Procedure:</strong>
-                  <p>{prog.applicationProcedure}</p>
-                </div>
-
-                <div className={styles["detail-box"]}>
-                  <strong>Tuition:</strong>
-                  <p>{prog.tuition}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+    <div className={styles.step2Container}>
+      {programs.map((prog) => (
+        <div key={prog.id} className={styles.programCard}>
+          <h3 className={styles.programName}>{prog.name}</h3>
+          <p className={styles.programDetails}><strong>Degree:</strong> {prog.degree}</p>
+          <p className={styles.programDetails}><strong>Description:</strong> {prog.description}</p>
+          <p className={styles.programDetails}><strong>Admission Requirement:</strong> {prog.admissionRequirement}</p>
+          <p className={styles.programDetails}><strong>Application Procedure:</strong> {prog.applicationProcedure}</p>
+          <p className={styles.programDetails}><strong>Tuition:</strong> ${prog.tuition}</p>
         </div>
+      ))}
+
+      {!showForm && (
+        <button className={styles.showFormButton} onClick={() => setShowForm(true)}>
+          Add Another Program
+        </button>
       )}
 
-      {/* Program Input Form */}
-      <div className={styles["input-container"]}>
-        <input
-          type="text"
-          name="name"
-          value={programData.name}
-          onChange={handleChange}
-          placeholder="Program Name"
-          className={styles["input-field"]}
-        />
+      {showForm && (
+        <div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="name" className={styles.inputLabel}>Program Name</label>
+            <input id="name" name="name" type="text" value={newProgram.name} onChange={handleChange} className={styles.inputField} placeholder="Enter program name" />
+          </div>
 
-        <textarea
-          name="description"
-          value={programData.description}
-          onChange={handleChange}
-          placeholder="Description"
-          className={styles["input-field"]}
-        />
+          <div className={styles.inputGroup}>
+            <label htmlFor="degree" className={styles.inputLabel}>Degree Type</label>
+            <input id="degree" name="degree" type="text" value={newProgram.degree} onChange={handleChange} className={styles.inputField} placeholder="E.g. Bachelor's, Master's, PhD" />
+          </div>
 
-        <input
-          type="text"
-          name="degree"
-          value={programData.degree}
-          onChange={handleChange}
-          placeholder="Degree (e.g. Master's)"
-          className={styles["input-field"]}
-        />
+          <div className={styles.inputGroup}>
+            <label htmlFor="description" className={styles.inputLabel}>Description</label>
+            <textarea id="description" name="description" value={newProgram.description} onChange={handleChange} className={styles.inputField} placeholder="Enter program description"></textarea>
+          </div>
 
-        <textarea
-          name="admissionRequirement"
-          value={programData.admissionRequirement}
-          onChange={handleChange}
-          placeholder="Admission Requirement"
-          className={styles["input-field"]}
-        />
+          <div className={styles.inputGroup}>
+            <label htmlFor="tuition" className={styles.inputLabel}>Tuition Fee ($)</label>
+            <input id="tuition" name="tuition" type="number" value={newProgram.tuition} onChange={handleChange} className={styles.inputField} placeholder="Enter tuition fee" />
+          </div>
 
-        <textarea
-          name="applicationProcedure"
-          value={programData.applicationProcedure}
-          onChange={handleChange}
-          placeholder="Application Procedure"
-          className={styles["input-field"]}
-        />
-
-        <input
-          type="number"
-          name="tuition"
-          value={programData.tuition}
-          onChange={handleChange}
-          placeholder="Tuition"
-          className={styles["input-field"]}
-        />
-
-        <button className={styles["add-program-btn"]} onClick={handleAddProgram}>
-          Add Program
-        </button>
-      </div>
+          <button className={styles.addProgramButton} onClick={handleAddProgram}>Add Program</button>
+        </div>
+      )}
     </div>
   );
 }

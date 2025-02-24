@@ -1,155 +1,148 @@
-/* Container for the form and program list */
-.step2-container {
-    padding: 30px;
-    
-    border-radius: 8px;
-  }
-  
-  .title {
-    font-size: 28px;
-    font-weight: 600;
-    color: #2d3436;  /* Darker text for better contrast */
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Program card styling */
-  .program-card {
-    border: none;
-    padding: 20px;
-    background: linear-gradient(145deg, #ffffff, #e0e0e0); 
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .program-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Grid layout inside the card (full width for description) */
-  .program-details {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
-  }
-  
-  /* Individual detail box */
-  .detail-box {
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Input container */
-  .input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
+:root {
+  --primary-color: #0078D4;
+  --primary-dark: #005bb5;
+  --text-color: #2C3E50;
+  --background-light: #F9FAFB;
+  --border-radius: 12px;
+  --shadow-light: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
 
 
- 
-  
+.step2Container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px; 
+  margin-left: 0; 
+}
 
 
+.programCard {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.98));
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  width: 100%;
+}
+
+.programCard:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
 
 
+.programName {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
 
-/* Input container */
-.input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: 30px;
+
+.programDetails {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.4;
+}
+
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+
+.inputLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+
+.inputField {
+  padding: 14px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: var(--border-radius);
+  background-color: var(--background-light);
+  color: var(--text-color);
+  width: 120%;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  box-shadow: var(--shadow-light);
+}
+
+.inputField:focus {
+  border-color: var(--primary-color);
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+.inputField:hover {
+  border-color: var(--primary-dark);
+}
+
+
+.addProgramButton {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.addProgramButton:hover {
+  background-color: var(--primary-dark);
+  box-shadow: var(--shadow-hover);
+}
+
+
+.showFormButton {
+  background-color: var(--primary-dark);
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.showFormButton:hover {
+  background-color: #004a92;
+  box-shadow: var(--shadow-hover);
+}
+
+
+@media (max-width: 768px) {
+  .step2Container {
+      max-width: 100%;
+      padding: 10px;
   }
-  
-  /* Style for input fields */
-  .input-field {
-    padding: 14px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 12px; /* Rounded corners for modern look */
-    background-color: #fafafa;
-    color: #333;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding doesn't mess with width */
+
+  .programName {
+      font-size: 16px;
   }
-  
-  .input-field:focus {
-    border-color: #2980b9; /* Blue border on focus */
-    box-shadow: 0 0 8px rgba(41, 128, 185, 0.4); /* Soft focus glow */
-    outline: none;
+
+  .inputField {
+      font-size: 14px;
+      width: 100%; 
   }
-  
-  .input-field::placeholder {
-    color: #999; /* Lighter color for placeholder text */
-  }
-  
-  /* Add Program button */
-  .add-program-btn {
-    padding: 14px 32px;
-    background-color: #2980b9;
-    color: white;
-    border: none;
-    border-radius: 30px; /* Round button for a sleek look */
-    cursor: pointer;
-    width: fit-content;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .add-program-btn:hover {
-    background-color: #3498db;
-    transform: scale(1.05); /* Slightly enlarge on hover */
-  }
-  
-  .add-program-btn:active {
-    transform: scale(1); /* Reset scale when button is clicked */
-  }
-  
-  .add-program-btn:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(41, 128, 185, 0.3); /* Focus effect */
-  }
-  
-  /* Toggle form button */
-  .toggle-form-btn {
-    padding: 14px 32px;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: #2980b9;
-    color: white;
-    border: none;
-    border-radius: 30px; /* Same rounded button style */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: fit-content;
-    align-self: center;
-    margin-top: 20px;
-  }
-  
-  .toggle-form-btn:hover {
-    background-color: #3498db;
-    transform: scale(1.05);
-  }
-  
-  .toggle-form-btn:active {
-    transform: scale(1);
-  }
-  
-  .toggle-form-btn:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(41, 128, 185, 0.3);
-  }
-  
+}

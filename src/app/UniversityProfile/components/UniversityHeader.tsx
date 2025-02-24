@@ -1,6 +1,8 @@
+"use client"
 import { Box, Typography, Chip, Button } from "@mui/material";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SchoolIcon from '@mui/icons-material/School';
+import { useRouter } from "next/navigation";
 
 interface UniversityHeaderProps {
   name: string;
@@ -11,6 +13,11 @@ interface UniversityHeaderProps {
 }
 
 const UniversityHeader = ({ name, verified, location, type, imageUrl }: UniversityHeaderProps) => {
+  const router = useRouter();
+
+  const handleEditClick = () => {
+    router.push("/CreateUni?editType=global&uniId=123");
+  };
   return (
     <Box sx={{ textAlign: "center", color: "white", borderRadius: "10px", overflow: "hidden", width: "100%" }}>
       {/* Image Container */}
@@ -92,6 +99,7 @@ const UniversityHeader = ({ name, verified, location, type, imageUrl }: Universi
                 backgroundColor: "primary.dark",
               },
             }}
+            onClick={handleEditClick}
           >
             Edit Profile
           </Button>

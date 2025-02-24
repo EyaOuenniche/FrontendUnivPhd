@@ -29,56 +29,69 @@ export default function Step1University({
   };
 
   return (
-    <div className={styles.step1Container}>
-      <h2 className={styles.title}>University Info</h2>
+    <>
+      
+      <div className={styles.inputGroup}>
+        <label htmlFor="universityName" className={styles.inputLabel}>
+          University Name
+        </label>
+        <input
+          id="universityName"
+          name="universityName"
+          type="text"
+          value={universityInfo.universityName}
+          onChange={handleChange}
+          className={styles.inputField}
+          placeholder="Enter university name"
+        />
+      </div>
 
-      <label htmlFor="universityName" className={styles.inputLabel}>
-        University Name
-      </label>
-      <input
-        id="universityName"
-        name="universityName"
-        type="text"
-        value={universityInfo.universityName}
-        onChange={handleChange}
-        className={styles.inputField}
-      />
+     
+      <div className={styles.inputGroup}>
+        <label htmlFor="accreditation" className={styles.inputLabel}>
+          Accreditation
+        </label>
+        <input
+          id="accreditation"
+          name="accreditation"
+          type="text"
+          value={universityInfo.accreditation}
+          onChange={handleChange}
+          className={styles.inputField}
+          placeholder="Enter accreditation details"
+        />
+      </div>
 
-      <label htmlFor="accreditation" className={styles.inputLabel}>
-        Accreditation
-      </label>
-      <input
-        id="accreditation"
-        name="accreditation"
-        type="text"
-        value={universityInfo.accreditation}
-        onChange={handleChange}
-        className={styles.inputField}
-      />
+      
+      <div className={styles.inputGroup}>
+        <label htmlFor="establishedYear" className={styles.inputLabel}>
+          Established Year
+        </label>
+        <input
+          id="establishedYear"
+          name="establishedYear"
+          type="text"
+          value={universityInfo.establishedYear}
+          onChange={handleChange}
+          className={styles.inputField}
+          placeholder="Enter the year of establishment"
+        />
+      </div>
 
-      <label htmlFor="establishedYear" className={styles.inputLabel}>
-        Established Year
-      </label>
-      <input
-        id="establishedYear"
-        name="establishedYear"
-        type="text"
-        value={universityInfo.establishedYear}
-        onChange={handleChange}
-        className={styles.inputField}
-      />
-
-      <label htmlFor="location" className={styles.inputLabel}>
-        Location
-      </label>
-      <input
-        id="location"
-        name="location"
-        type="text"
-        value={universityInfo.location}
-        onChange={handleChange}
-        className={styles.inputField}
-      />
-    </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="location" className={styles.inputLabel}>
+          Location
+        </label>
+        <input
+          id="location"
+          name="location"
+          type="text"
+          value={universityInfo.location}
+          onChange={handleChange}
+          className={styles.inputField}
+          placeholder="Enter the university location"
+        />
+      </div>
+    </>
   );
 }

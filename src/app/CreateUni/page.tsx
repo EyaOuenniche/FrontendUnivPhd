@@ -1,138 +1,71 @@
 "use client";
-import React, { useState } from "react";
-import { Box, Typography, Stepper, Step, StepLabel } from "@mui/material";
-import { FormDataShape, Program, SubSpecialty, Course, Term } from "./components/types";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import UniForm from "./components/UniForm";
+import { FormDataShape } from "./components/types";
 
-import Step1University from "./components/Step1Univ";
-import Step2Programs from "./components/Step2Programs";
-import Step3SubSpecialties from "./components/Step3SubSpecialities";
-import Step4Courses from "./components/Step4Courses";
-import Step5TermsMapping from "./components/Step5Terms";
-import Step6Review from "./components/Step6Review";
-import styles from "./StepperForm.module.css";
 
-const steps = [
-  "University Info",
-  "Programs",
-  "Sub-Specialties",
-  "Courses",
-  "Terms & Mapping",
-  "Review",
-];
+const mock_uni_data: FormDataShape = {
+  universityName: "Mock University",
+  accreditation: "Mock Accreditation",
+  establishedYear: "2000",
+  location: "Mock City",
+  programs: [
+    {
+      id: "2",
+      name: "Mock Program for Edit",
+      description: "This is a mock program to demonstrate program editing.",
+      degree: "Master",
+      admissionRequirement: "Some mock requirements",
+      applicationProcedure: "Mock procedure",
+      tuition: 1234,
+      subSpecialties: [], 
+    },
+  ],
+};
 
-const stepComponents = [
-  Step1University,
-  Step2Programs,
-  Step3SubSpecialties,
-  Step4Courses,
-  Step5TermsMapping,
-  Step6Review,
-];
+export default function Page() {
+ 
+  const searchParams = useSearchParams();
+  const editType = searchParams.get("editType");  
+  const uniId = searchParams.get("uniId");        
+  const programId = searchParams.get("programId");
+  const stepParam = searchParams.get("step");     
 
-export default function UniForm() {
-  const [activeStep, setActiveStep] = useState<number>(0);
+  
+  const [existingData, setExistingData] = useState<FormDataShape | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  // Split state for better performance
-  const [universityInfo, setUniversityInfo] = useState({
-    universityName: "",
-    accreditation: "",
-    establishedYear: "",
-    location: "",
-  });
+  useEffect(() => {
+   
+    if (editType && uniId) {
+      setLoading(true);
 
-  const [programs, setPrograms] = useState<Program[]>([]);
-  const [subSpecialties, setSubSpecialties] = useState<{ [key: string]: SubSpecialty[] }>({});
-  const [courses, setCourses] = useState<{ [key: string]: Course[] }>({});
-  const [terms, setTerms] = useState<{ [key: string]: Term[] }>({});
+      
+      setTimeout(() => {
+        console.log(
+          `Mock: fetching data for uniId=${uniId}, editType=${editType}, programId=${programId}`
+        );
+        setExistingData(mock_uni_data);
+        setLoading(false);
+      }, 1000);
+    }
+  }, [editType, uniId, programId]);
 
-  // Function to get final data
-  const getFinalFormData = (): FormDataShape => ({
-    ...universityInfo,
-    programs: programs.map((program) => ({
-      ...program,
-      subSpecialties: subSpecialties[program.id] || [],
-    })),
-  });
+  
+  if (loading) {
+    return <div>Loading existing data...</div>;
+  }
 
-  const handleNext = () => setActiveStep((prev) => prev + 1);
-  const handleBack = () => setActiveStep((prev) => prev - 1);
+  const defaultStep = stepParam ? parseInt(stepParam, 10) : 0;
 
-  const handleSubmit = () => {
-    const finalData = getFinalFormData();
-    console.log("Submitted Data:", finalData);
-    setActiveStep((prev) => prev + 1);
-  };
-
-  const StepComponent = stepComponents[activeStep];
+  const isEdit = !!editType;
 
   return (
-    <div className={styles.stepperPage}>
-      <div className={styles.stepperContainer}>
-        <Typography className={styles.stepperTitle}>
-          Create Your University Profile
-        </Typography>
-
-        {/* Improved Stepper Layout */}
-        <div className={styles.stepperWrapper}>
-          <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((label, index) => (
-              <Step key={index}>
-                <StepLabel
-                  StepIconProps={{
-                    style: {
-                      color: activeStep >= index ? "#0078D4" : "#ddd",
-                      transition: "color 0.3s ease-in-out",
-                    },
-                  }}
-                  className={styles.stepperLabel}
-                >
-                  {label}
-                </StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-        </div>
-
-        {/* Step Content */}
-        {activeStep === steps.length ? (
-          <Typography variant="h5" textAlign="center" color="success.main">
-            🎉 Thank you! Your information has been submitted.
-          </Typography>
-        ) : (
-          <>
-            <StepComponent
-              universityInfo={universityInfo}
-              setUniversityInfo={setUniversityInfo}
-              programs={programs}
-              setPrograms={setPrograms}
-              subSpecialties={subSpecialties}
-              setSubSpecialties={setSubSpecialties}
-              courses={courses}
-              setCourses={setCourses}
-              terms={terms}
-              setTerms={setTerms}
-            />
-
-            {/* Navigation Buttons */}
-            <Box className={styles.stepperButtons}>
-              {activeStep > 0 && (
-                <button className={styles.secondaryButton} onClick={handleBack}>
-                  Back
-                </button>
-              )}
-              {activeStep < steps.length - 1 ? (
-                <button className={styles.primaryButton} onClick={handleNext}>
-                  Next
-                </button>
-              ) : (
-                <button className={styles.primaryButton} onClick={handleSubmit}>
-                  Submit
-                </button>
-              )}
-            </Box>
-          </>
-        )}
-      </div>
-    </div>
+    <UniForm
+      editMode={isEdit}
+      existingData={existingData || undefined}
+      defaultStep={defaultStep}
+    />
   );
 }

@@ -9,6 +9,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useRouter } from "next/navigation";
 
 // Define Types for the Program Data
 type Course = { name: string; code: string; credits: number };
@@ -31,6 +32,7 @@ interface Program {
 
 
 const ProgramPage = () => {
+  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const [expandedSubprogram, setExpandedSubprogram] = useState<string | null>(null);
   const [expandedSemester, setExpandedSemester] = useState<string | null>(null);
@@ -57,7 +59,11 @@ const ProgramPage = () => {
       </Box>
     );
   }
-
+ 
+  const handleEditClick = () => {
+    router.push(`/CreateUni?editType=program&step=2&programId=${id}`);
+  };
+   
   const programs: Program[] = [
     {
       id: "1",
@@ -469,7 +475,7 @@ const ProgramPage = () => {
           color="primary"
           sx={{ marginRight: 2 }}
           startIcon={<EditIcon />}
-          onClick={() => console.log("Edit functionality here")} // Implement your edit logic
+          onClick={handleEditClick}
         >
           Edit
         </Button>
