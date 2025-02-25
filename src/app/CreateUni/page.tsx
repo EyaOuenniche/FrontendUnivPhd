@@ -139,7 +139,7 @@ export default function Page() {
     }, 1000);
   }, [editType, uniId, programId]);
 
-  if (loading) return <div>Loading existing data...</div>;
+ 
 
   const defaultStep = stepParam ? parseInt(stepParam, 10) : 0;
   const isEdit = !!editType;
