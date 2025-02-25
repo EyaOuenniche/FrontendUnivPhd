@@ -17,6 +17,7 @@ export default function Step2Programs({
     admissionRequirement: "",
     applicationProcedure: "",
     tuition: "",
+    duration: "",
   });
 
   const [showForm, setShowForm] = useState(programs.length === 0); 
@@ -36,11 +37,20 @@ export default function Step2Programs({
       admissionRequirement: newProgram.admissionRequirement.trim(),
       applicationProcedure: newProgram.applicationProcedure.trim(),
       tuition: Number(newProgram.tuition),
+      duration: newProgram.duration.trim(), 
       subSpecialties: [],
     };
 
     setPrograms([...programs, program]);
-    setNewProgram({ name: "", description: "", degree: "", admissionRequirement: "", applicationProcedure: "", tuition: "" });
+    setNewProgram({
+      name: "",
+      description: "",
+      degree: "",
+      admissionRequirement: "",
+      applicationProcedure: "",
+      tuition: "",
+      duration: "",
+    });
     setShowForm(false); 
   };
 
@@ -50,6 +60,7 @@ export default function Step2Programs({
         <div key={prog.id} className={styles.programCard}>
           <h3 className={styles.programName}>{prog.name}</h3>
           <p className={styles.programDetails}><strong>Degree:</strong> {prog.degree}</p>
+          <p className={styles.programDetails}><strong>Duration:</strong> {prog.duration}</p>
           <p className={styles.programDetails}><strong>Description:</strong> {prog.description}</p>
           <p className={styles.programDetails}><strong>Admission Requirement:</strong> {prog.admissionRequirement}</p>
           <p className={styles.programDetails}><strong>Application Procedure:</strong> {prog.applicationProcedure}</p>
@@ -74,7 +85,18 @@ export default function Step2Programs({
             <label htmlFor="degree" className={styles.inputLabel}>Degree Type</label>
             <input id="degree" name="degree" type="text" value={newProgram.degree} onChange={handleChange} className={styles.inputField} placeholder="E.g. Bachelor's, Master's, PhD" />
           </div>
-
+          <div className={styles.inputGroup}>
+            <label htmlFor="duration" className={styles.inputLabel}>Duration</label>
+            <input
+              id="duration"
+              name="duration"
+              type="text"
+              value={newProgram.duration}
+              onChange={handleChange}
+              className={styles.inputField}
+              placeholder="e.g. 2 years"
+            />
+          </div>
           <div className={styles.inputGroup}>
             <label htmlFor="description" className={styles.inputLabel}>Description</label>
             <textarea id="description" name="description" value={newProgram.description} onChange={handleChange} className={styles.inputField} placeholder="Enter program description"></textarea>

@@ -43,7 +43,8 @@ export default function Step6Review({
       {programs.map((prog) => (
         <Box key={prog.id} className={styles.section}>
           <Typography className={styles.programName}>{prog.name}</Typography>
-
+          <p><strong>Duration:</strong> {prog.duration}</p>
+          <p><strong>Degree:</strong> {prog.degree}</p>
           {subSpecialties[prog.id]?.map((sub) => (
             <Box key={sub.id} className={styles.subSpecialtyCard}>
               <Typography className={styles.subSpecialtyTitle}>{sub.name}</Typography>

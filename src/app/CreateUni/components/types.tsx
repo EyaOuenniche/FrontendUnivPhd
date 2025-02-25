@@ -36,6 +36,7 @@ export interface Course {
     applicationProcedure: string;
     tuition: number;               
     subSpecialties: SubSpecialty[];
+    duration: string;
   }
   
   // The top-level Form Data
