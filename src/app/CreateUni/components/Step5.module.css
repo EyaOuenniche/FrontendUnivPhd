@@ -1,0 +1,109 @@
+  
+  
+  .programTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #004080;
+    margin-bottom: 12px;
+  }
+
+  .subSpecialtyCard {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .subSpecialtyHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  
+  .subSpecialtyTitle {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #002b5b;
+  }
+  
+  
+  .addTermButton {
+    background: #004080;
+    color: white;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .addTermButton:hover {
+    background: #003366;
+  }
+  
+  
+  .termCard {
+    background: #eef5ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .termTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 8px;
+  }
+  
+
+  .assignedCourses {
+    margin-bottom: 10px;
+  }
+  
+  .assignedCoursesTitle {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .courseList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .courseItem {
+    background: linear-gradient(to right, #e3f2fd, #ffffff);
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #004080;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .noCourses {
+    color: #777;
+    font-style: italic;
+  }
+  
+ 
+  .dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  

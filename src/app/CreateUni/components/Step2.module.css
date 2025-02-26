@@ -1,0 +1,148 @@
+:root {
+  --primary-color: #0078D4;
+  --primary-dark: #005bb5;
+  --text-color: #2C3E50;
+  --background-light: #F9FAFB;
+  --border-radius: 12px;
+  --shadow-light: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+.step2Container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px; 
+  margin-left: 0; 
+}
+
+
+.programCard {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.98));
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  width: 100%;
+}
+
+.programCard:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+
+.programName {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+
+.programDetails {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.4;
+}
+
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+
+.inputLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+
+.inputField {
+  padding: 14px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: var(--border-radius);
+  background-color: var(--background-light);
+  color: var(--text-color);
+  width: 120%;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  box-shadow: var(--shadow-light);
+}
+
+.inputField:focus {
+  border-color: var(--primary-color);
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+.inputField:hover {
+  border-color: var(--primary-dark);
+}
+
+
+.addProgramButton {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.addProgramButton:hover {
+  background-color: var(--primary-dark);
+  box-shadow: var(--shadow-hover);
+}
+
+
+.showFormButton {
+  background-color: var(--primary-dark);
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.showFormButton:hover {
+  background-color: #004a92;
+  box-shadow: var(--shadow-hover);
+}
+
+
+@media (max-width: 768px) {
+  .step2Container {
+      max-width: 100%;
+      padding: 10px;
+  }
+
+  .programName {
+      font-size: 16px;
+  }
+
+  .inputField {
+      font-size: 14px;
+      width: 100%; 
+  }
+}

@@ -1,0 +1,120 @@
+:root {
+    --primary-color: #0078D4;
+    --primary-dark: #005bb5;
+    --secondary-color: #FF6F61;
+    --secondary-dark: #E24E42;
+    --light-gray: #F4F6F8;
+    --text-color: #2C3E50;
+    --border-radius: 12px;
+    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+.stepperPage {
+    background: linear-gradient(135deg, #E3F2FD, #FCE4EC);
+    font-family: "Inter", sans-serif;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 80px 20px;
+}
+
+
+.stepperContainer {
+    width: 100%;
+    max-width: 1100px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    padding: 50px;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+
+.stepperTitle {
+    font-size: 96px; 
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 40px; 
+    padding-bottom:50px ;
+    color: var(--primary-dark);
+}
+
+
+.stepperWrapper {
+    width: 100%;
+    margin-bottom: 40px; 
+}
+
+.stepperLabel {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: var(--text-color) !important;
+}
+
+
+.MuiStepIcon-root {
+    font-size: 32px !important; 
+}
+
+.stepperButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+
+.primaryButton {
+    background: var(--primary-color);
+    color: white;
+    padding: 16px 28px; 
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.primaryButton:hover {
+    background: var(--primary-dark);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.primaryButton:active {
+    transform: scale(0.98);
+}
+
+
+.secondaryButton {
+    background: var(--secondary-color);
+    color: white;
+    padding: 16px 28px; 
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.secondaryButton:hover {
+    background: var(--secondary-dark);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.secondaryButton:active {
+    transform: scale(0.98);
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

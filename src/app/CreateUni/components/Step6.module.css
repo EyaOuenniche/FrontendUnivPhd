@@ -1,0 +1,121 @@
+
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+.header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.section {
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #004080;
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #002b5b;
+  margin-bottom: 10px;
+}
+
+
+.text {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.programCard {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.programName {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #004080;
+  margin-bottom: 8px;
+}
+
+
+.subSpecialtyCard {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.subSpecialtyTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #002b5b;
+  margin-bottom: 5px;
+}
+
+
+.courseList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.courseItem {
+  background: linear-gradient(to right, #e3f2fd, #ffffff);
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #004080;
+}
+
+
+.prereqs {
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+}
+
+
+.termCard {
+  background: #eef5ff;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.termName {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #003366;
+}
+
+.termDates {
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+}
+
+
+.noItems {
+  color: #777;
+  font-style: italic;
+}
