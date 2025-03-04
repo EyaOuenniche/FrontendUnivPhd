@@ -1,22 +1,29 @@
+/** Data models used across steps */
+
+// Research Team Model
+export interface ResearchTeam {
+  name: string;
+  members: { name: string; role: string; email: string }[];
+}
+
+// Research Paper Model
 export interface ResearchPaper {
-  id: string;
   title: string;
-  authors: string[];
-  publicationYear: number;
+  abstract: string;
+  publicationDate?: string;
   link?: string;
 }
 
-export interface ResearchTeam {
-  id: string;
-  name: string;
-}
-
-export interface ResearchLab {
-  id: string;
+// Research Lab Form Data Model
+export interface ResearchLabFormData {
   name: string;
   description: string;
-  university?: string;
-  isIndependent: boolean;
+  affiliatedInstitution?: string;
+  independent: boolean;
+  location: string;
+  contactEmail: string;
+  contactPhone?: string;
+  website?: string;
   researchTeams: ResearchTeam[];
   researchPapers: ResearchPaper[];
 }
