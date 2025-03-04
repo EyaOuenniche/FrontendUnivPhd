@@ -33,8 +33,8 @@ function ResearchLabForm() {
 
   return (
     <div>
-      <h1>Create Research Lab</h1>
-      <p>Step {step} of 4</p>
+      {/* <h1>Create Research Lab</h1>
+      <p>Step {step} of 4</p> */}
 
       {step === 1 && <Step1BasicInfo formData={formData} setFormData={setFormData} nextStep={nextStep} />}
       {step === 2 && <Step2ResearchTeams formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}

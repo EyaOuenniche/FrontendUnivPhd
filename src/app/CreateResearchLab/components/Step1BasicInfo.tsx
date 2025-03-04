@@ -1,5 +1,6 @@
 import styles from "./Step1BasicInfo.module.css";
 import { ResearchLabFormData } from "./types";
+import { Stepper, Step, StepLabel } from "@mui/material"; 
 
 interface Step1BasicInfoProps {
   formData: ResearchLabFormData;
@@ -7,10 +8,21 @@ interface Step1BasicInfoProps {
   nextStep: () => void;
 }
 
+const steps = ["Basic Info", "Research Teams", "Research Papers", "Review & Submit"]; 
+
 function Step1BasicInfo({ formData, setFormData, nextStep }: Step1BasicInfoProps) {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
+      
+        <Stepper activeStep={0} alternativeLabel>
+          {steps.map((label, index) => (
+            <Step key={index}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+
         <h2 className={styles.heading}>Basic Information & Contact</h2>
 
         <label className={styles.label}>Lab Name</label>
@@ -27,7 +39,7 @@ function Step1BasicInfo({ formData, setFormData, nextStep }: Step1BasicInfoProps
           placeholder="Enter description"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          className={styles.input}
+          className={`${styles.input} ${styles.textarea}`}
         />
 
         <label className={styles.label}>Affiliated Institution (Optional)</label>
@@ -86,7 +98,9 @@ function Step1BasicInfo({ formData, setFormData, nextStep }: Step1BasicInfoProps
           className={styles.input}
         />
 
-        <button onClick={nextStep} className={styles.button}>Next Step →</button>
+        <button onClick={nextStep} className={styles.button}>
+          Next Step →
+        </button>
       </div>
     </div>
   );

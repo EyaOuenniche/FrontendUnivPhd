@@ -1,0 +1,85 @@
+/* 🌟 General Styles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #eef2ff, #c7d2fe); /* Soft Indigo Gradient */
+    padding: 20px;
+  }
+  
+  /* 🌟 Card Layout */
+  .card {
+    background: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    padding: 32px;
+    width: 100%;
+    max-width: 700px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* 🌟 Headings */
+  .heading {
+    font-size: 26px;
+    font-weight: 700;
+    color: #4F46E5; /* Vibrant Indigo */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* 🌟 Team List */
+  .teamList {
+    margin-top: 10px;
+  }
+  
+  .teamCard {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .teamCard:hover {
+    background: #e0e7ff;
+    transform: scale(1.02);
+  }
+  
+  /* 🌟 Button */
+  .button {
+    background: #4F46E5;
+    color: white;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    margin-top: 24px;
+  }
+  
+  .button:hover {
+    background: #4338ca;
+    transform: scale(1.03);
+  }
+  
+  /* 🌟 Fade In Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

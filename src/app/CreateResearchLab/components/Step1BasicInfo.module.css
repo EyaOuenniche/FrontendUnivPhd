@@ -1,72 +1,101 @@
+/* 🌟 General Styles */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f3f4f6; /* Light Gray */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #eef2ff, #c7d2fe); /* Soft Indigo Gradient */
+  padding: 20px;
+}
+
+/* 🌟 Card Layout */
+.card {
+  background: white;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 700px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 🌟 Headings */
+.heading {
+  font-size: 26px;
+  font-weight: 700;
+  color: #4F46E5; /* Vibrant Indigo */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 🌟 Labels */
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151; /* Deep Gray */
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* 🌟 Input Fields */
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #f9fafb;
+  transition: all 0.3s ease-in-out;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #4F46E5;
+  background: #ffffff;
+  outline: none;
+  box-shadow: 0px 0px 10px rgba(79, 70, 229, 0.2);
+}
+
+/* 🌟 Checkbox */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #1f2937;
+  margin-top: 10px;
+}
+
+/* 🌟 Button */
+.button {
+  background: #4F46E5;
+  color: white;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  margin-top: 24px;
+}
+
+.button:hover {
+  background: #4338ca;
+  transform: scale(1.03);
+}
+
+/* 🌟 Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  .card {
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    padding: 24px;
-    width: 100%;
-    max-width: 600px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .heading {
-    font-size: 24px;
-    font-weight: 600;
-    color: #4F46E5; /* Indigo */
-    margin-bottom: 16px;
-  }
-  
-  .label {
-    font-size: 14px;
-    font-weight: 500;
-    color: #1F2937; /* Dark Gray */
-    display: block;
-    margin-bottom: 6px;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border 0.3s;
-  }
-  
-  .input:focus {
-    border: 2px solid #4F46E5;
-    outline: none;
-  }
-  
-  .checkbox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-  }
-  
-  .button {
-    background-color: #4F46E5;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 8px;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s;
-    border: none;
-    margin-top: 16px;
-  }
-  
-  .button:hover {
-    background-color: #4338ca;
-  }
-  
+}
