@@ -5,18 +5,10 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
+import { Paper } from '@mui/material';
+import { UserProfile} from './types';
 
-interface UserProfile {
-  id: number;
-  password: string;
-  firstName: string;
-  lastName: string;
-  linkedin: string;
-  dob: string;
-  isActive: boolean;
-  displayName: string;
-  isAdmin: boolean;
-}
+
 
 interface ProfileProps {
   user: UserProfile;
@@ -31,7 +23,7 @@ const emptyUser: UserProfile = {
   linkedin: '',
   dob: '',
   isActive: false,
-  displayName: '',
+  name: '',
   isAdmin: false,
 };
 
@@ -54,12 +46,15 @@ export default function ProfileEdit({ user = emptyUser, onSave }: ProfileProps) 
     e.preventDefault();
     onSave(formData);
   };
-
+  const handleCancel = () => {
+  console.log('cancel button clicked' );
+    
+  };
   return (
     
-    <Container maxWidth="sm" sx={{ bgcolor: '#cfe8fc', p: 4 }}>
+    <Container maxWidth="sm"component={Paper} elevation={5}>
       
-      <Box component="form" onSubmit={handleSubmit} sx={{  borderRadius: 1, bgcolor: 'white', p: 2 }}>
+      <Box component="form" onSubmit={handleSubmit} sx={{  p:2 }}>
         <TextField
           label="Password"
           name="password"
@@ -116,14 +111,22 @@ export default function ProfileEdit({ user = emptyUser, onSave }: ProfileProps) 
           sx={{ color: 'black' }}
         />
         <TextField
-          label="Display Name"
-          name="displayName"
-          value={formData.displayName}
+          label="Display name"
+          name="name"
+          value={formData.name}
           onChange={handleChange}
           fullWidth
           margin="normal"
         />
-        <FormControlLabel
+        <TextField
+          label="Email"
+          name="email"
+          // value={formData.email}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        {/* <FormControlLabel
           control={
             <Checkbox
               name="isAdmin"
@@ -133,12 +136,17 @@ export default function ProfileEdit({ user = emptyUser, onSave }: ProfileProps) 
           }
           label="Is Admin"
           sx={{ color: 'black' }}
-        />
+        /> */}
+        <Box >
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
           Save
         </Button>
+        <Button type='button' variant="contained" color="error" onClick={handleCancel} sx={{ mt: 2 ,ml:2}}> 
+          cancel
+        </Button>
+        </Box>
       </Box>
     </Container>
   
   );
-}
+  }
